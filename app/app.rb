@@ -15,12 +15,26 @@ class Bookmarks < Sinatra::Base
   end
 
   post '/links' do
-    Link.new(url: params[:url], title: params[:title]).save
+    link = Link.new(url: params[:url], title: params[:title])
+    tag = Tag.create(name: params[:tag])
+    link.tags << tag
+    link.save
     redirect '/links'
   end
 
   get '/links/new' do
     erb :'links/new'
+  end
+
+  get '/tags/:name' do
+    tag = Tag.first(name: params[:name])
+    begin
+      p tag.links
+    rescue
+      p "tags.links failed for a reason"
+    end
+    @links = tag ? tag.links : []
+    erb :'links/index'
   end
 
 end
