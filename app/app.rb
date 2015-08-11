@@ -5,6 +5,9 @@ require_relative '../data_mapper_setup'
 
 class Bookmarks < Sinatra::Base
 
+  get '/' do
+  redirect '/links'
+  end
 
   get '/links' do
     @links = Link.all
