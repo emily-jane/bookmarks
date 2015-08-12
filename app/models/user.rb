@@ -14,6 +14,7 @@ class User
   property :password_digest, Text
 
   validates_confirmation_of :password
+  validates_uniqueness_of :email
 
   def password=(password)
     @password = password
