@@ -16,8 +16,10 @@ class Bookmarks < Sinatra::Base
 
   post '/links' do
     link = Link.new(url: params[:url], title: params[:title])
-    tag = Tag.create(name: params[:tag])
-    link.tags << tag
+    params[:tags].split(" ").each do |tag|
+      tag = Tag.create(name: tag)
+      link.tags << tag
+    end
     link.save
     redirect '/links'
   end
@@ -25,15 +27,11 @@ class Bookmarks < Sinatra::Base
   get '/links/new' do
     erb :'links/new'
   end
-
+ 
   get '/tags/:name' do
+
     tag = Tag.first(name: params[:name])
-    begin
-      p tag.links
-    rescue
-      p "tags.links failed for a reason"
-    end
-    @links = tag ? tag.links : []
+    @links = tag ? tag.links : [] # brilliant refactoring
     erb :'links/index'
   end
 
