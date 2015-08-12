@@ -1,6 +1,6 @@
 require 'data_mapper'
 require 'sinatra'
-require 'dm-validations'
+
 
 class Tag
   include DataMapper::Resource
