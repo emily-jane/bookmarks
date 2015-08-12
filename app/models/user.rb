@@ -3,7 +3,6 @@ require 'sinatra'
 require 'bcrypt'
 require 'dm-validations'
 
-
 class User
   include DataMapper::Resource
 
