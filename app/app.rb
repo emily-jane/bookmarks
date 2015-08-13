@@ -1,13 +1,14 @@
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'sinatra/partial'
 require_relative 'models/link.rb'
 require_relative '../data_mapper_setup'
-
 
 class Bookmarks < Sinatra::Base
 
 enable :sessions
 register Sinatra::Flash
+register Sinatra::Partial
 set :session_secret, 'super secret'
 use Rack::MethodOverride
 
@@ -41,7 +42,6 @@ end
   end
  
   get '/tags/:name' do
-
     tag = Tag.first(name: params[:name])
     @links = tag ? tag.links : [] 
     erb :'links/index'

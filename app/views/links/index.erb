@@ -4,7 +4,9 @@
   <% @links.each do |link| %>
     <li>
       Title: <%= link.title %>
-      URL:   <%= link.url   %>
+      URL:   <a href="http://<%= link.url%>" target="_blank"><%= link.url%></a>
+      tag:   <%= link.tags.map(&:name) %>
     </li>
   <% end %>
+  <p><a href='/links/new'> Please click here to add a new link</a></p>
 </ul>
