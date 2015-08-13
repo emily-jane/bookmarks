@@ -18,7 +18,7 @@ helpers do
 end
 
   get '/' do
-  redirect '/links/new'
+  erb :welcome
   end
 
   get '/links' do
