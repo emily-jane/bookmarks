@@ -57,11 +57,8 @@ end
     if @user.save
       session[:user_id] = @user.id
       redirect to('/links')
-    elsif password_confirmation != password
-      flash.now[:notice] = "Password and confirmation password do not match"
-      erb :'users/new'
-    elsif email == '' || nil
-      flash.now[:notice] = "Please enter an email address"
+    else
+      flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'
     end
   end
