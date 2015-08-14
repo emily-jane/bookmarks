@@ -12,6 +12,7 @@ class User
   property :id, Serial
   property :email, String, required: true
   property :password_digest, Text
+  property :password_token, Text
 
   validates_confirmation_of :password
   validates_uniqueness_of :email
@@ -29,5 +30,9 @@ class User
     else
       nil
     end
+  end
+
+  def password_token
+    (0...50).map { ('A'..'Z').to_a[rand(26)] }.join
   end
 end

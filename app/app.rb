@@ -42,7 +42,7 @@ end
   end
  
   get '/tags/:name' do
-    tag = Tag.first(name: params[:name])
+    tag = Tag.all(name: params[:name])
     @links = tag ? tag.links : [] 
     erb :'links/index'
   end
@@ -82,6 +82,11 @@ end
     session[:user_id] = nil
     flash.now[:notice] = 'goodbye!'
     erb :'sessions/new'
+  end
+
+  get '/password_reset' do
+  flash.now[:notice] = 'Check your emails'
+    erb :password_reset
   end
 
   run! if app_file == $0
