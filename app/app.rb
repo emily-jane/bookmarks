@@ -67,6 +67,11 @@ end
     erb :'sessions/new'
   end
 
+  post '/sessions/new' do
+    flash.now[:notice] = 'Check your emails'
+    erb :'sessions/new'
+  end
+
   post '/sessions' do
     user = User.authenticate(params[:email], params[:password])
     if user
@@ -84,9 +89,8 @@ end
     erb :'sessions/new'
   end
 
-  get '/password_reset' do
-  flash.now[:notice] = 'Check your emails'
-    erb :password_reset
+  get '/users/password_reset' do
+    erb :'users/password_reset'
   end
 
   run! if app_file == $0
